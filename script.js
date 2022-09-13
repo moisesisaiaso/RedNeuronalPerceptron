@@ -1,5 +1,6 @@
 const p = document.getElementById("puntos");
 const parrafo2 = document.getElementById("pesosBias");
+const resultado = document.getElementById("resultado");
 
 //*puntos
 // const puntos = [
@@ -164,10 +165,19 @@ console.log(`
 
 *************************************`);
 
+//^ imprime puntos
 p.innerHTML = `${puntos.map((P, i) => {
     return `P${i + 1}(${P.X1},${P.X2})  T= ${P.T}
     
     `;
 })}`;
+
+//^ imprime nuevos datos
+resultado.innerHTML = `  ITERACIÓN ${ii}
+|
+R = Wn(${W[0]} , ${W[1]}) 
+|
+BIAS = ${BIAS} 
+`;
 
 console.table(puntos);
