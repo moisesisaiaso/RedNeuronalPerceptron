@@ -151,7 +151,6 @@ while (aprende != puntos.length) {
             console.log(`Peso nuevo: (${Wn[0]} , ${Wn[1]})`);
             console.log("Bias nuevo:", BIASn);
         }
-        console.log("aprende: " + aprende);
     }
 
     ii++;
@@ -173,7 +172,7 @@ p.innerHTML = `${puntos.map((P, i) => {
 })}`;
 
 //^ imprime nuevos datos
-resultado.innerHTML = `  ITERACIÓN ${ii}
+resultado.innerHTML = `  ITERACIÓN ${ii - 1}
 |
 R = Wn(${W[0]} , ${W[1]}) 
 |
