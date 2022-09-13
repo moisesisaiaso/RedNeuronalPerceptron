@@ -1,24 +1,90 @@
-header {
+.App {
     text-align: center;
-    margin-top: 40px;
-    margin-bottom: 40px;
 }
 
-section {
-    height: 420px;
-    padding: 0px 0px 0px 10px;
+.App-header {
+    background-image: url(img/fondo1.gif);
+    background-size: 100% 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
-div {
-    float: left;
-    border: 1px solid black;
-    border-radius: 5px;
-    width: 180px;
-    height: 180px;
-    margin-bottom: 10px;
-    margin-left: 5px;
+.App-link {
+    color: #61dafb;
 }
 
-footer {
-    text-align: center;
+/** new*/
+@font-face {
+    font-family: FredokaOne;
+    src: url(fonts/FredokaOne-Regular.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: Raleway;
+    src: url(fonts/Raleway-Medium.ttf) format("truetype");
+}
+.title {
+    font-family: FredokaOne;
+    letter-spacing: 2px;
+}
+
+.content {
+    font-family: Raleway;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.card {
+    box-shadow: -1px 1px 5px rgb(222 219 219);
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    width: 520px;
+    height: 520px;
+    padding: 25px 40px;
+    border-radius: 20px;
+    color: black;
+    font-family: Raleway;
+    opacity: 0.9;
+}
+
+p.title {
+    font-size: 2.5rem;
+    text-shadow: 1px 1px white, -1px -1px #333;
+    padding-bottom: 20px;
+    color: #ddd;
+}
+
+.notification {
+    margin: 15px 0px;
+    padding-top: 20px;
+    font-weight: bolder;
+    font-size: 1.6rem;
+    text-shadow: 1px 1px white, -1px -1px #333;
+    color: rgb(64, 66, 64);
+    letter-spacing: 2px;
+}
+
+.notification .country {
+    margin-bottom: -5px;
+}
+
+.notification p {
+    margin-bottom: 5px;
+}
+
+hr {
+    border: 0px;
+    border-bottom: 1px solid;
+    border-color: rgb(221, 212, 212);
+    box-shadow: 0px 1px 5px rgb(222 219 219);
 }

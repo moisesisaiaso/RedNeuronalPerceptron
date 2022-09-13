@@ -1,3 +1,6 @@
+const p = document.getElementById("puntos");
+const parrafo2 = document.getElementById("pesosBias");
+
 //*puntos
 // const puntos = [
 //     {
@@ -73,12 +76,16 @@ do {
 } while (arrayPesosStr.length != 2);
 
 let W = arrayPesosNum;
-console.log(W);
 
 //* bias
 let biass = parseFloat(prompt("Ingresa el BIAS", 0));
 let BIAS = biass;
-console.log(BIAS);
+
+//^ imprimp pesos y BIAS
+parrafo2.innerHTML = `
+W(${W}) BIAS(${BIAS})
+`;
+
 //? aprende
 let aprende = 0;
 
@@ -156,5 +163,11 @@ console.log(`
 -     BIAS = ${BIAS}   
 
 *************************************`);
+
+p.innerHTML = `${puntos.map((P, i) => {
+    return `P${i + 1}(${P.X1},${P.X2})  T= ${P.T}
+    
+    `;
+})}`;
 
 console.table(puntos);
