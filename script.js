@@ -38,18 +38,19 @@ do {
     let punto = prompt("Ingresa el punto y T separados por espacios");
     arrayPuntoStr = punto.split(" "); // convirtiendolo a array
 
-    if (arrayPuntoStr.length != 3) {
+    if (arrayPuntoStr.length != 4) {
         arrayPuntoStr = null;
         contar = 1; // el contador se reinicia si los datos no fueron enviados correctamente, de esta forma no se cuenta esta iteración para añadir un punto al array de objetos
         alert("Ingrese correctamente los datos");
     } else {
         // si los datos se envian correctos se crea un objeto(un punto en el array)
         let arrayPuntoNum = arrayPuntoStr.map(Number); // convierte el array string a un array number
-        const [X1, X2, T] = arrayPuntoNum;
+        const [X1, X2, X3, T] = arrayPuntoNum;
 
         const P = {
             X1,
             X2,
+            X3,
             T,
         };
 
@@ -69,13 +70,13 @@ do {
     let Pesos = prompt("Ingrese los pesos separados por un espacio");
     arrayPesosStr = Pesos.split(" ");
 
-    if (arrayPesosStr.length != 2) {
+    if (arrayPesosStr.length != 3) {
         alert("Ingrese correctamente los datos");
         arrayPesosStr = null;
     } else {
         arrayPesosNum = arrayPesosStr.map(Number);
     }
-} while (arrayPesosStr.length != 2);
+} while (arrayPesosStr.length != 3);
 
 let W = arrayPesosNum;
 
@@ -104,9 +105,9 @@ while (aprende != puntos.length) {
 
     for (i = 0; i < puntos.length; i++) {
         let p = puntos[i];
-        const [W1, W2] = W;
+        const [W1, W2, W3] = W;
         //*C
-        let c = p.X1 * W1 + p.X2 * W2 + BIAS;
+        let c = p.X1 * W1 + p.X2 * W2 + p.X3 * W3 + BIAS;
 
         // * a HARDLIMS
 
@@ -135,21 +136,22 @@ while (aprende != puntos.length) {
             let e = p.T - a;
 
             //~ pesos nuevos
-            const pesosNuevo = (W1, W2, e, p) => {
+            const pesosNuevo = (W1, W2, W3, e, p) => {
                 let Wn1 = W1 + e * p.X1;
                 let Wn2 = W2 + e * p.X2;
+                let Wn3 = W3 + e * p.X3;
 
-                return [Wn1, Wn2];
+                return [Wn1, Wn2, Wn3];
             };
 
-            let Wn = pesosNuevo(W1, W2, e, p);
+            let Wn = pesosNuevo(W1, W2, W3, e, p);
             W = Wn;
 
             //~ Bias nuevo
             let BIASn = BIAS + e;
             BIAS = BIASn;
             console.log("Error: ", e);
-            console.log(`Peso nuevo: (${Wn[0]} , ${Wn[1]})`);
+            console.log(`Peso nuevo: (${Wn[0]} , ${Wn[1]}, ${Wn[2]})`);
             console.log("Bias nuevo:", BIASn);
         }
     }
@@ -160,21 +162,21 @@ while (aprende != puntos.length) {
 console.log(`
 *************************************
 -                             
-- R = W(${W[0]} , ${W[1]})    
+- R = W(${W[0]} , ${W[1]}, ${W[2]})    
 -     BIAS = ${BIAS}   
 
 *************************************`);
 
 //^ imprime puntos
 p.innerHTML = `${puntos.map((P, i) => {
-    return `P${i + 1}(${P.X1},${P.X2})  T= ${P.T}  `;
+    return `P${i + 1}(${P.X1},${P.X2}), ${P.X3}  T= ${P.T}  `;
 })}`;
 
 //^ N iteración
 iteracion.innerHTML = ` ITERACIÓN ${ii - 1}`;
 
 //^ imprime resultado
-resultado.innerHTML = `R = Wn(${W[0]} , ${W[1]}) 
+resultado.innerHTML = `R = Wn(${W[0]} , ${W[1]}, ${W[2]}) 
 |
 BIASn = ${BIAS} 
 `;
