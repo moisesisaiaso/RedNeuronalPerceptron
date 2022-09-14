@@ -1,5 +1,6 @@
 const p = document.getElementById("puntos");
 const parrafo2 = document.getElementById("pesosBias");
+const iteracion = document.querySelector("h3");
 const resultado = document.getElementById("resultado");
 
 //*puntos
@@ -166,17 +167,34 @@ console.log(`
 
 //^ imprime puntos
 p.innerHTML = `${puntos.map((P, i) => {
-    return `P${i + 1}(${P.X1},${P.X2})  T= ${P.T}
-    
-    `;
+    return `P${i + 1}(${P.X1},${P.X2})  T= ${P.T}  `;
 })}`;
 
-//^ imprime nuevos datos
-resultado.innerHTML = `  ITERACIÓN ${ii - 1}
+//^ N iteración
+iteracion.innerHTML = ` ITERACIÓN ${ii - 1}`;
+
+//^ imprime resultado
+resultado.innerHTML = `R = Wn(${W[0]} , ${W[1]}) 
 |
-R = Wn(${W[0]} , ${W[1]}) 
-|
-BIAS = ${BIAS} 
+BIASn = ${BIAS} 
 `;
 
 console.table(puntos);
+
+//Hora
+const currentTime = () => {
+    const el = document.querySelector("h1");
+    let date = new Date();
+    let hh = date.getHours();
+    let mm = date.getMinutes();
+    let ss = date.getSeconds();
+
+    hh = hh < 10 ? `0${hh}` : hh;
+    mm = mm < 10 ? `0${mm}` : mm;
+    ss = ss < 10 ? `0${ss}` : ss;
+
+    let time = `${hh}:${mm}:${ss}`;
+    el.innerHTML = time;
+};
+currentTime();
+setInterval(() => currentTime(), 1000);
