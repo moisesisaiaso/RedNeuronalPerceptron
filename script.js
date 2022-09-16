@@ -1,4 +1,4 @@
-const p = document.getElementById("puntos");
+const parrafo1 = document.getElementById("puntos");
 const parrafo2 = document.getElementById("pesosBias");
 const iteracion = document.querySelector("h3");
 const resultado = document.getElementById("resultado");
@@ -28,34 +28,65 @@ const resultado = document.getElementById("resultado");
 // ];
 
 const puntos = [];
-let nPuntos = parseInt(prompt("¿Cuantos puntos deseas calcular?", 0));
+let nPuntos = parseInt(prompt("¿Cuantas entradas desea calcular?", 0));
+let nCaracteristicas = parseInt(prompt("¿Cuantas caracteristicas se van a evaluar?", 0));
+
+//* entrada de los grupos T
+const gruposTArray = [];
+let estado = undefined;
+for (let i = 1; i <= 2; i++) {
+    let grupoT = parseInt(prompt(`T se divide en dos grupos, ingrese el GRUPO ${i}`, 0));
+
+    let positivoNegativo = grupoT >= 0 ? 1 : -1;
+    if (estado === undefined || positivoNegativo === estado) {
+        gruposTArray.push(grupoT);
+    } else {
+        if (estado === 1) {
+            alert("Entrada incorrecta, el valor debe ser positivo vuela a intentarlo");
+        } else {
+            alert("Entrada incorrecta, el valor debe ser negativo vuela a intentarlo");
+        }
+        grupoT = undefined;
+        i--;
+    }
+    if (i === 1) {
+        if (grupoT >= 0) {
+            alert("El siguiente grupo debe ser un número en negativo");
+            estado = -1;
+        } else if (grupoT < 0) {
+            alert("El siguiente grupo debe ser un número en positivo");
+            estado = 1;
+        }
+    }
+}
 
 let arrayPuntoStr = null;
 let contar = 1;
 do {
     //? entrada de puntos por string
     //esto se repite si la longitud de arrayPunto es diferente de 3, esto quiere decir que el array no ha sido obtenido correctamente por mal envio de los datos
-    let punto = prompt("Ingresa el punto y T separados por espacios");
-    arrayPuntoStr = punto.split(" "); // convirtiendolo a array
+    let punto = prompt(`Ingresa las características del punto ${contar} separadas por coma`);
+    arrayPuntoStr = punto.split(","); // convirtiendolo a array
 
-    if (arrayPuntoStr.length != 4) {
+    if (arrayPuntoStr.length != nCaracteristicas) {
         arrayPuntoStr = null;
-        contar = 1; // el contador se reinicia si los datos no fueron enviados correctamente, de esta forma no se cuenta esta iteración para añadir un punto al array de objetos
+        contar--; // el contador se reinicia si los datos no fueron enviados correctamente, de esta forma no se cuenta esta iteración para añadir un punto al array de objetos
         alert("Ingrese correctamente los datos");
     } else {
         // si los datos se envian correctos se crea un objeto(un punto en el array)
         let arrayPuntoNum = arrayPuntoStr.map(Number); // convierte el array string a un array number
-        const [X1, X2, X3, T] = arrayPuntoNum;
+        const P = {};
 
-        const P = {
-            X1,
-            X2,
-            X3,
-            T,
-        };
+        arrayPuntoNum.forEach((punto, i) => {
+            P[`X${i + 1}`] = punto;
+        });
 
-        //^ mandando el objeto(punto) al array puntos
+        //^ mandando el objeto(P) al array puntos
+        let t = parseInt(prompt("¿A qué grupo en T pertenece?", 0));
+        P[`T`] = t;
         puntos.push(P);
+
+        gruposTArray.push(t);
     }
 
     contar++;
@@ -67,16 +98,16 @@ console.log(puntos);
 let arrayPesosStr = null;
 let arrayPesosNum = null;
 do {
-    let Pesos = prompt("Ingrese los pesos separados por un espacio");
-    arrayPesosStr = Pesos.split(" ");
+    let Pesos = prompt("Ingrese los pesos por coma");
+    arrayPesosStr = Pesos.split(",");
 
-    if (arrayPesosStr.length != 3) {
+    if (arrayPesosStr.length != nCaracteristicas) {
         alert("Ingrese correctamente los datos");
         arrayPesosStr = null;
     } else {
         arrayPesosNum = arrayPesosStr.map(Number);
     }
-} while (arrayPesosStr.length != 3);
+} while (arrayPesosStr.length != nCaracteristicas);
 
 let W = arrayPesosNum;
 
@@ -84,9 +115,9 @@ let W = arrayPesosNum;
 let biass = parseFloat(prompt("Ingresa el BIAS", 0));
 let BIAS = biass;
 
-//^ imprimp pesos y BIAS
+//^ imprimo pesos y BIAS
 parrafo2.innerHTML = `
-W(${W}) BIAS(${BIAS})
+W(${W}) BIAS = ${BIAS}
 `;
 
 //? aprende
@@ -97,32 +128,57 @@ console.log(
 );
 
 //^ Iterar
+//falta resolver
 let ii = 1;
 while (aprende != puntos.length) {
+    // mientras aprender no sea igual a la cantidad de puntos entonces debe seguir iterando, esto por que cuando aprender es igual a 0 significa que el peso y bias no es el indicado osea debe aprender, mientras que si aprende llega a la cantidad de puntos significa que el mismo peso y bias pasó por todos los puntos sin necesidad de aprender
     console.log(`
     /////////////////////////////////////
                 ITERACIÓN ${ii}`);
 
-    for (i = 0; i < puntos.length; i++) {
+    for (let i = 0; i < puntos.length; i++) {
         let p = puntos[i];
-        const [W1, W2, W3] = W;
+
         //*C
-        let c = p.X1 * W1 + p.X2 * W2 + p.X3 * W3 + BIAS;
+        let c = 0;
+        let sumaPW = 0;
+        let caracteriArray = Object.entries(p);
+
+        let tDelPuntoObjeto = 0;
+
+        caracteriArray.forEach((propiedadArray, i) => {
+            if (i < nCaracteristicas) {
+                sumaPW += propiedadArray[1] * W[i];
+            } else {
+                sumaPW += BIAS;
+                tDelPuntoObjeto = propiedadArray[1];
+            }
+        });
+
+        c = sumaPW;
 
         // * a HARDLIMS
 
         let a = 0;
+        gruposTArray.forEach((T) => {
+            if (T >= 0) {
+                T1 = T;
+            } else {
+                T2 = T;
+            }
+        });
+
         if (c >= 0) {
-            a = 1;
+            a = T1;
         } else {
-            a = -1;
+            a = T2;
         }
 
         console.log(`🚀 ---------------- P${i + 1} ----------------- 🤖`);
         console.log(`Hardlims(${c})`);
-        console.log("T esperado: " + p.T + "    " + "resultado a: ", a);
+        console.log("T esperado: " + tDelPuntoObjeto + "    " + "resultado a: ", a);
         //? Comprobar si "a" es igual a "T"
-        if (a === p.T) {
+        if (a === tDelPuntoObjeto) {
             console.log("No necesita aprender 🎉😎🤘🦾");
             aprende++;
             if (aprende === puntos.length) {
@@ -133,25 +189,29 @@ while (aprende != puntos.length) {
             aprende = 0;
 
             //^ Error
-            let e = p.T - a;
+            let e = tDelPuntoObjeto - a;
 
             //~ pesos nuevos
-            const pesosNuevo = (W1, W2, W3, e, p) => {
-                let Wn1 = W1 + e * p.X1;
-                let Wn2 = W2 + e * p.X2;
-                let Wn3 = W3 + e * p.X3;
+            const arrayP = [];
+            const pesosNuevo = (e, caracteriArray, ...W) => {
+                caracteriArray.forEach((propiedadArray, i) => {
+                    if (i < nCaracteristicas) {
+                        arrayP.push(W[i] + e * propiedadArray[1]);
+                    }
+                });
 
-                return [Wn1, Wn2, Wn3];
+                return arrayP;
             };
 
-            let Wn = pesosNuevo(W1, W2, W3, e, p);
+            let Wn = pesosNuevo(e, caracteriArray, ...W);
+            console.log("pesoPueba" + Wn);
             W = Wn;
 
             //~ Bias nuevo
             let BIASn = BIAS + e;
             BIAS = BIASn;
             console.log("Error: ", e);
-            console.log(`Peso nuevo: (${Wn[0]} , ${Wn[1]}, ${Wn[2]})`);
+            console.log(`Peso nuevo: (${Wn})`);
             console.log("Bias nuevo:", BIASn);
         }
     }
@@ -162,28 +222,34 @@ while (aprende != puntos.length) {
 console.log(`
 *************************************
 -                             
-- R = W(${W[0]} , ${W[1]}, ${W[2]})    
+- R = W(${W})    
 -     BIAS = ${BIAS}   
 
 *************************************`);
 
-//^ imprime puntos
-p.innerHTML = `${puntos.map((P, i) => {
-    return `P${i + 1}(${P.X1},${P.X2}), ${P.X3}  T= ${P.T}  `;
-})}`;
+//? imprimiento en el body
 
+//^ imprime puntos
+parrafo1.innerHTML = `${puntos.map((P, i) => {
+    return `P${i + 1}(${Object.entries(P).map((propiedadArray, i) => {
+        if (i < nCaracteristicas) {
+            return propiedadArray[1];
+        }
+    })}) T= ${P.T}   `;
+})}`;
+//Object.entries(P).map() es una forma de poder iterar un objeto, lo que hace es convertir las propiedades del objeto en un array es decir por cada propiedad nos crear un array donde su indice tiene como nombre la clave de la propiedad y su valor, es decir nos crear una colección de array
 //^ N iteración
 iteracion.innerHTML = ` ITERACIÓN ${ii - 1}`;
 
 //^ imprime resultado
-resultado.innerHTML = `R = Wn(${W[0]} , ${W[1]}, ${W[2]}) 
+resultado.innerHTML = `R = Wn(${W}) 
 |
 BIASn = ${BIAS} 
 `;
 
 console.table(puntos);
 
-//Hora
+//? Hora
 const currentTime = () => {
     const el = document.querySelector("h1");
     let date = new Date();
@@ -200,3 +266,16 @@ const currentTime = () => {
 };
 currentTime();
 setInterval(() => currentTime(), 1000);
+
+//? fondos aleatorios
+const Background = ["img/Hoja.gif", "img/fondo1.gif", "img/giphy.gif"];
+
+const cambiaFondo = (...fondo) => {
+    let header = document.getElementById("fondos");
+    let numAleatorio = Math.floor(Math.random() * fondo.length);
+    header.style.backgroundImage = `url(${fondo[numAleatorio]})`;
+};
+
+cambiaFondo(...Background);
+
+setInterval(() => cambiaFondo(...Background), 10000);

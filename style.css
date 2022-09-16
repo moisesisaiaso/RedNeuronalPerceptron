@@ -3,7 +3,6 @@
 }
 
 .App-header {
-    background-image: url(img/Hoja1.gif);
     background-size: 100% 100%;
     min-height: 100vh;
     display: flex;
@@ -109,4 +108,5 @@ button {
 /*hora*/
 h1#el {
     margin-top: -25px !important;
+    text-shadow: 5px 5px 4px black;
 }
