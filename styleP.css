@@ -1,0 +1,216 @@
+/** new*/
+@font-face {
+    font-family: FredokaOne;
+    src: url(fonts/FredokaOne-Regular.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: Raleway;
+    src: url(fonts/Raleway-Medium.ttf) format("truetype");
+}
+.title {
+    font-family: FredokaOne;
+    letter-spacing: 2px;
+}
+
+.content {
+    font-family: Raleway;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+p.title {
+    font-size: 3.5rem;
+    text-shadow: 2px 2px 3px #cbced1, -2px -2px 3px #ffffff, 2px 2px 3px #cbced1,
+        -2px -2px 3px #ffffff, 2px 2px 3px #05080b, -2px -2px 3px #ffffff, 2px 2px 3px #05080b,
+        -2px -2px 3px #ffffff, 2px 2px 3px #cbced1, -2px -2px 3px #ffffff, 2px 2px 3px #cbced1,
+        -2px -2px 3px #ffffff, 2px 2px 3px #cbced1, -2px -2px 3px #ffffff, 2px 2px 3px #cbced1,
+        -2px -2px 3px #ffffff, 2px 2px 3px #cbced1, -2px -2px 3px #ffffff, 2px 2px 3px #cbced1,
+        -2px -2px 3px #ffffff, 2px 2px 3px #cbced1, -2px -2px 3px #ffffff, 2px 2px 3px #cbced1,
+        -2px -2px 3px #ffffff;
+    padding-bottom: 20px;
+    color: #ecf0f3;
+}
+
+.titleP {
+    text-align: center;
+}
+
+body {
+    padding: 15px;
+    background-color: #ece8e8;
+}
+
+.card {
+    padding: 20px 35px 20px 35px !important;
+    font-family: "Lato", sans-serif !important;
+    border-radius: 40px;
+    background: #ecf0f3 !important;
+    box-shadow: 8px 8px 10px #cbced1, 6px 6px 10px #ffffff inset;
+    margin-top: 20px !important;
+    margin: 14px;
+    font-size: 15px;
+    min-width: 300px;
+    float: left;
+    transition: all 300ms;
+}
+
+.inset {
+    display: block;
+    box-shadow: inset 8px 8px 8px#cbced1, inset -8px -8px 8px #ffffff;
+    margin-bottom: 13px;
+    border-radius: 25px;
+    padding: 20px 30px 15px 30px;
+}
+
+b {
+    display: block;
+    color: #555;
+}
+
+h3 {
+    margin-bottom: 5px;
+    color: #24cfaa;
+}
+
+h1 {
+    font-weight: inherit;
+    font-family: FredokaOne;
+    text-align: center !important;
+    font-size: 35px;
+    margin-bottom: 15px;
+    color: #24cfaa;
+    text-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #ffffff;
+}
+
+.right {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+section {
+    display: flex;
+    flex-wrap: wrap;
+}
+/*Iteranción */
+.iteracion,
+.respuesta {
+    margin: 40px 0px 20px 0px;
+    flex: 1 1000px;
+}
+
+.iteracion h1 {
+    color: #555;
+}
+
+/*Cuando tiene que aprender*/
+h2 {
+    text-align: center;
+    color: rgb(234, 87, 112);
+    text-shadow: 0px 0px 3px rgb(255, 255, 255);
+}
+.H,
+.E {
+    padding: 15px 30px 10px 30px;
+}
+
+/*Cuando no  tiene que aprende*/
+
+h2#noAprender {
+    text-align: center;
+    color: rgb(62, 111, 226);
+    text-shadow: 0px 0px 3px rgb(255, 255, 255);
+}
+
+.inset2 {
+    margin-bottom: 30px;
+}
+
+p#emoji {
+    display: flex;
+    flex-direction: row;
+}
+
+.emoji3 {
+    font-size: 50px;
+}
+
+.emoji4 {
+    display: flex;
+    align-items: flex-end;
+    height: 80px;
+    justify-content: space-between;
+}
+
+/*RESULTADO*/
+.respuesta {
+    justify-content: center;
+}
+
+.respuesta h1 {
+    font-size: 50px;
+    margin-bottom: -1px;
+}
+
+.respuesta li {
+    display: block;
+}
+#cerebros {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.respuesta li {
+    font-size: 20px;
+}
+
+.respuesta .emoji3 {
+    margin-top: 10px;
+}
+
+.respuesta .emoji4 {
+    height: 40px;
+}
+
+.respuesta #pesos {
+    margin-bottom: 10px;
+}
+
+/*footer*/
+footer {
+    font-family: "Lato", sans-serif !important;
+    font-size: 20px;
+    height: 100px;
+    text-align: center;
+}
+
+footer b {
+    line-height: 100px;
+    color: rgb(122, 121, 121);
+}
+
+.card:hover {
+    transform: scale(1.1, 1.1);
+}
+
+/*retroceder*/
+#atras img {
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin-left: 40px;
+}
+
+#atras:hover {
+    display: block;
+    width: 50px;
+    height: 50px;
+    transition: all 300ms;
+    transform: scale(1.3, 1.3);
+}

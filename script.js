@@ -98,7 +98,7 @@ console.log(puntos);
 let arrayPesosStr = null;
 let arrayPesosNum = null;
 do {
-    let Pesos = prompt("Ingrese los pesos por coma");
+    let Pesos = prompt("Ingrese los pesos separador por coma");
     arrayPesosStr = Pesos.split(",");
 
     if (arrayPesosStr.length != nCaracteristicas) {
@@ -204,7 +204,7 @@ while (aprende != puntos.length) {
             };
 
             let Wn = pesosNuevo(e, caracteriArray, ...W);
-            console.log("pesoPueba" + Wn);
+
             W = Wn;
 
             //~ Bias nuevo
